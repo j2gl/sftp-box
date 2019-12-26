@@ -1,0 +1,35 @@
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+
+UseDNS no
+
+# Logging
+SyslogFacility AUTH
+#LogLevel INFO
+LogLevel VERBOSE
+
+
+# Authentication:
+LoginGraceTime 2m
+PermitRootLogin no
+X11Forwarding no
+AllowTcpForwarding no
+MaxAuthTries 32
+MaxSessions 8
+
+PubkeyAuthentication yes
+AuthorizedKeysFile	.ssh/authorized_keys
+PermitEmptyPasswords yes
+PasswordAuthentication yes
+
+# Change to no to disable s/key passwords
+ChallengeResponseAuthentication yes
+
+Banner /etc/ssh/banner.txt
+
+# override default of no subsystems
+Subsystem	sftp	/usr/lib/ssh/sftp-server
+
